@@ -2,12 +2,14 @@ package com.devsuperior.demo.services;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.demo.dto.EmployeeDTO;
 import com.devsuperior.demo.entities.Employee;
 import com.devsuperior.demo.repositories.EmployeeRepository;
 
+@Service
 public class EmployeeService {
 	
 	private final EmployeeRepository repository;
