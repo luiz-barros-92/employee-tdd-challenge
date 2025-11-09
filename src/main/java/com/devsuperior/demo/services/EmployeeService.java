@@ -14,17 +14,17 @@ import com.devsuperior.demo.repositories.EmployeeRepository;
 @Service
 public class EmployeeService {
 	
-	private final EmployeeRepository repository;
+	private final EmployeeRepository employeeRepository;
 	private final DepartmentRepository departmentRepository;
 
-	public EmployeeService(EmployeeRepository repository, DepartmentRepository departmentRepository) {
-		this.repository = repository;
+	public EmployeeService(EmployeeRepository employeeRepository, DepartmentRepository departmentRepository) {
+		this.employeeRepository = employeeRepository;
 		this.departmentRepository = departmentRepository;
 	}
 	
 	@Transactional(readOnly = true)
 	public Page<EmployeeDTO> findAll(Pageable pageable){
-		Page<Employee> page = repository.findAll(pageable);
+		Page<Employee> page = employeeRepository.findAll(pageable);
 		return page.map(EmployeeDTO::new);
 	}
 	
@@ -35,7 +35,7 @@ public class EmployeeService {
 		entity.setEmail(dto.email());
 		Department department = departmentRepository.getReferenceById(dto.departmentId());
 		entity.setDepartment(department);
-		entity = repository.save(entity);
+		entity = employeeRepository.save(entity);
 		return new EmployeeDTO(entity);		
 	}
 }
